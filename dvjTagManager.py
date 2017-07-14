@@ -7,7 +7,7 @@ from SQLbackend import *
 
 #Create the window object    # All windows object between window=Tk() and window.mainloop()
 window=Tk()
-window.geometry("650x400")
+#window.geometry("650x400")
 window.title("DaVinci Jr Password Manager")
 
 temperature=IntVar()
@@ -94,7 +94,7 @@ e7.grid(row=7, column=2)
 
 
 # define ListBox and scroll bar
-list1=Listbox(window, height=10, width=40)
+list1=Listbox(window, height=10, width=35)
 list1.grid(row=10, column=0, rowspan=10, columnspan=2)
 list1.bind('<<ListboxSelect>>', lambda event: onselect(event, id_text, UID1_text, UID2_text, password_text, pack_text, used_text ))
 
@@ -136,14 +136,14 @@ b10.grid(row=15, column=4)
 
 # define Radio Buttons and label
 lTemp=Label(window, text="Filament Temperature")
-lTemp.grid(row=1, column=4, sticky=E, columnspan=2)
+lTemp.grid(row=1, column=4, columnspan=2)
 
 rTempLow = Radiobutton(window, text="190*", value=190, variable = temperature)
 rTempLow.grid(row=2, column=4, sticky=E)
 temperature.set(190)
 
 rTempHi = Radiobutton(window, text="210*", value=210, variable = temperature)
-rTempHi.grid(row=2, column=5, sticky=E)
+rTempHi.grid(row=2, column=5) #, sticky=E)
 
 lSpool=Label(window, text="      Spool Size")
 lSpool.grid(row=4, column=4, columnspan=2)
@@ -152,7 +152,7 @@ rSpool200 = Radiobutton(window, text="200M", value=200, variable = spoolsize)
 rSpool200.grid(row=5, column=4, sticky=E)
 
 rSpool300 = Radiobutton(window, text="300M", value=300, variable = spoolsize)
-rSpool300.grid(row=5, column=5, sticky=E)
+rSpool300.grid(row=5, column=5) #, sticky=E)
 spoolsize.set(300)
 
 #end of window object
