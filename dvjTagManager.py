@@ -150,7 +150,7 @@ lSpool.grid(row=4, column=4, columnspan=2)
 rSpool200 = Radiobutton(window, text="200M", value=200, variable = spoolsize)
 rSpool200.grid(row=5, column=4, sticky=E)
 
-rSpool300 = Radiobutton(window, text="300M*", value=300, variable = spoolsize)
+rSpool300 = Radiobutton(window, text="300M", value=300, variable = spoolsize)
 rSpool300.grid(row=5, column=5, sticky=E)
 spoolsize.set(300)
 
