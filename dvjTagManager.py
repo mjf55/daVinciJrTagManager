@@ -6,7 +6,7 @@ from SQLbackend import *
 
 #Create the window object    # All windows object between window=Tk() and window.mainloop()
 window=Tk()
-window.geometry("650x400")
+#window.geometry("650x400")
 window.title("DaVinci Jr Password Manager")
 
 temperature=IntVar()
