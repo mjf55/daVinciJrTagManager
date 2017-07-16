@@ -16,7 +16,7 @@ sStatus=StringVar()
 # Menu System
 menubar = Menu(window)
 filemenu = Menu(menubar, tearoff=0)
-filemenu.add_command(label="Create Database", command=lambda: dbCreateUpdate(sStatus, window, tkFileDialog)) 
+filemenu.add_command(label="Create or Update Database", command=lambda: dbCreateUpdate(sStatus, window, tkFileDialog)) 
 
 filemenu.add_separator()
 

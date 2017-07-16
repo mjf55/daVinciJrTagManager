@@ -15,7 +15,6 @@ def myExit(window):
 def myDelete(status, oid):
 	mDelete = tkMessageBox.askyesno(title="Delete Record", message='Are you sure?')
 	if mDelete > 0:
-		print (oid)
 		delete(status, oid)
 		return
 	
@@ -43,14 +42,13 @@ def dbCreateUpdate(status, window, FD):
 				# Use only if there is a PACK valid -> Record is valid
 				if PACK:
 					insert(status, UID1.rstrip(), UID2.rstrip(), Pword.rstrip(), PACK.rstrip(), Used)
-	status.set("Status: Database created")
+	status.set("Status: Database updated")
 
 	
 def onselect(evt, id, uid1, uid2, pword, pack, used):
 	w = evt.widget
 	index = int(w.curselection()[0])
 	value = w.get(index)
-	print value
 	id.set(value[0])
 	uid1.set(value[1])
 	uid2.set(value[2])
