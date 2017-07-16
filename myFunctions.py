@@ -1,6 +1,7 @@
 import  csv
 from SQLbackend import connect, insert, delete
 import tkMessageBox
+import os
 
 def notyet(window):
 	tkMessageBox.showinfo(title="Function Not Supported", message='Sorry, I have not implimented this function yet')
@@ -11,15 +12,18 @@ def myExit(window):
 	print "See ya later, Alligator"
 	window.quit()
 
-def myDelete( id):
+def myDelete(status, oid):
 	mDelete = tkMessageBox.askyesno(title="Delete Record", message='Are you sure?')
 	if mDelete > 0:
-		print (id)
-		delete(id)
+		print (oid)
+		delete(status, oid)
 		return
 	
-def importCSV(status, window, FD):
+def dbCreateUpdate(status, window, FD):
+
 	status.set("Status: This may take awhile")
+
+	#now lets open the csv file and  create / update  the database
 	fname= FD.askopenfilename(initialdir = ".",title = "Select file",filetypes = (("csv files","*.csv"),("all files","*.*")))
 	connect()
 	with open(fname, 'rb') as csvfile:  
@@ -36,16 +40,17 @@ def importCSV(status, window, FD):
 				tempPACK= array[13]  + array[14] 
 				Used = ""
 				PACK = tempPACK.rstrip()
-				
 				# Use only if there is a PACK valid -> Record is valid
 				if PACK:
 					insert(status, UID1.rstrip(), UID2.rstrip(), Pword.rstrip(), PACK.rstrip(), Used)
-	status.set("Status: CSV file has been updated")
+	status.set("Status: Database created")
+
 	
 def onselect(evt, id, uid1, uid2, pword, pack, used):
 	w = evt.widget
 	index = int(w.curselection()[0])
 	value = w.get(index)
+	print value
 	id.set(value[0])
 	uid1.set(value[1])
 	uid2.set(value[2])
