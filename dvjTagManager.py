@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python 
 from Tkinter import *
 import Tkinter, Tkconstants, tkFileDialog
 from myFunctions import *
