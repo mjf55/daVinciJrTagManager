@@ -132,6 +132,9 @@ b9.grid(row=15, column=5)
 b10=Button(window, text="Delete Record", bg='red', width=16, command=lambda: myDelete(sStatus, e1.get()))
 b10.grid(row=15, column=4)
 
+b11=Button(window, text="Clear Input", bg='yellow', width=16, command=lambda: clearEntry(sStatus, END,  e1, e2, e3, e4, e5, e6, e7))
+b11.grid(row=0, column=2)
+
 # define Radio Buttons and label
 lTemp=Label(window, text="Filament Temperature")
 lTemp.grid(row=1, column=4, sticky=E, columnspan=2)

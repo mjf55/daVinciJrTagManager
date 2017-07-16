@@ -105,3 +105,12 @@ def generateTagData(status, uid1, uid2, pword, pack, temperature, spoolsize, pag
 	f1.close()
 	status.set("Status: New tag data written as " + fname)
 
+
+def clearEntry(sStatus, END, id, uid1, uid2, pword, pack, used, page9):
+	id.delete(0,END)
+	uid1.delete(0,END)
+	uid2.delete(0,END)
+	pword.delete(0,END)
+	pack.delete(0,END)
+	used.delete(0,END)
+	page9.delete(0,END)
