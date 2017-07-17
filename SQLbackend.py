@@ -11,7 +11,7 @@ def  insert( status, UID1, UID2, Pword, PACK, Used):
 	UIDall = UID1+UID2+Pword+PACK
 	conn=sqlite3.connect("davincipw.db")
 	cur=conn.cursor()
-	cur.execute("INSERT OR IGNORE INTO tagdata VALUES ( ?, ?, ?, ?, ?, ?)",  (UID1, UID2, Pword, PACK, Used, UIDall))
+	cur.execute("INSERT OR IGNORE INTO tagdata VALUES ( ?, ?, ?, ?, ?, ?)",  (UID1.upper(), UID2.upper(), Pword.upper(), PACK.upper(), Used, UIDall.upper()))
 	conn.commit()
 	conn.close()
 	status.set("Status: Record Inserted into the database")
@@ -21,7 +21,7 @@ def  update(status, oid, UID1, UID2, Pword, PACK, Used):
 	UIDall = UID1+UID2+Pword+PACK
 	conn=sqlite3.connect("davincipw.db")
 	cur=conn.cursor()
-	cur.execute("UPDATE tagdata SET UID1=?, UID2=?, Pword=?, PACK=?, Used=? WHERE oid =?" , (UID1, UID2, Pword, PACK, Used, oid))
+	cur.execute("UPDATE tagdata SET UID1=?, UID2=?, Pword=?, PACK=?, Used=? WHERE oid =?" , (UID1.upper(), UID2.upper(), Pword.upper(), PACK.upper(),  Used, oid))
 	conn.commit()
 	conn.close()
 	status.set("Status: Record has been updated")
@@ -65,7 +65,7 @@ def search(status, listbox, END, oid, UID1, UID2, Pword, PACK, Used):
 	conn=sqlite3.connect("davincipw.db")
 	conn.text_factory = str   # gets rid of the u in the data (unicode) for fetchall
 	cur=conn.cursor()
-	cur.execute("SELECT oid, UID1, UID2, Pword, PACK, Used FROM tagdata WHERE oid=? OR UID1=? OR UID2=? OR Pword=? OR PACK=? ", (oid, UID1, UID2, Pword, PACK))
+	cur.execute("SELECT oid, UID1, UID2, Pword, PACK, Used FROM tagdata WHERE oid=? OR UID1=? OR UID2=? OR Pword=? OR PACK=? ", (oid, UID1.upper(), UID2.upper(), Pword.upper(), PACK.upper()))
 	rows = cur.fetchall() 
 	conn.close()
 	listbox.delete(0, END)
