@@ -1,7 +1,7 @@
 import  csv
 from SQLbackend import connect, insert, delete
 import tkMessageBox
-import os
+#import os
 
 def notyet(window):
 	tkMessageBox.showinfo(title="Function Not Supported", message='Sorry, I have not implimented this function yet')
@@ -114,3 +114,9 @@ def clearEntry(sStatus, END, id, uid1, uid2, pword, pack, used, page9):
 	pack.delete(0,END)
 	used.delete(0,END)
 	page9.delete(0,END)
+
+def myInsert(status, END, id, uid1, uid2, pword, pack, used, page9):
+
+	insert(status, uid1.get(), uid2.get(), pword.get(), pack.get(), used.get())
+
+	clearEntry(status, END, id, uid1, uid2, pword, pack, used, page9)

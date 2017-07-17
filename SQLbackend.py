@@ -7,7 +7,7 @@ def connect():  # this is working, but need to think about unique values to not 
 	conn.commit()
 	conn.close()
 	
-def  insert( status, UID1, UID2, Pword, PACK, Used): 
+def  insert(status, UID1, UID2, Pword, PACK, Used): 
 	UIDall = UID1+UID2+Pword+PACK
 	conn=sqlite3.connect("davincipw.db")
 	cur=conn.cursor()
