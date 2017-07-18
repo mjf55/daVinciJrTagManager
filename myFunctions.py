@@ -8,7 +8,6 @@ def notyet(window):
 	return
 	
 def myExit(window):
-	# does not work  window not defined
 	print "See ya later, Alligator"
 	window.quit()
 
