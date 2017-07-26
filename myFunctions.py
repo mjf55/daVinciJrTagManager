@@ -1,7 +1,7 @@
 import  csv
 from SQLbackend import connect, insert, delete
 import tkMessageBox
-from Tkinter import Tk, Toplevel, Button
+from Tkinter import * #Tk, Toplevel, Button
 #import os
 
 def notyet(window):
@@ -128,16 +128,67 @@ def raise_window(window):
 def destroy_help_window(window2destroy):
     window2destroy.destroy()
 
+# Displays help text in the text box
+def whatText(where, what):
+	where.delete(1.0,END)
+	where.insert(END, what)
+
 def myHelp():
 # Create new top level window. Opens immediately
 	help_window = Toplevel()
 	help_window.title('da Vinci Tag Manager Help')
-	help_window.geometry("400x200")
+	help_window.geometry("600x300")
 	raise_window(help_window)
 	help_window.focus_force()
-
-	close_button = Button(help_window,  text='Close this help window',  command=lambda: destroy_help_window(help_window)	)
-	close_button.pack()
-
-# help window fcus
 	
+#create a button frame
+	button_frame = Frame(help_window)
+	button_frame.pack()
+
+# add seperator / frame
+	separator = Frame(help_window, height=2, bd=1, relief=SUNKEN)
+	separator.pack(fill=X, padx=5, pady=5)
+
+# help window focus
+	help_scroll = Scrollbar(help_window)
+	help_text = Text(help_window, height=10, width=80, wrap=WORD, borderwidth=5, padx=10)
+	help_scroll.pack(side=RIGHT, fill=Y)
+	help_text.pack(side=LEFT, fill=Y)
+	help_scroll.config(command=help_text.yview)
+	help_text.config(yscrollcommand=help_scroll.set)
+	h_text = """
+	Welcome to the daVinci Tag Manager.  This program will allow you \
+	to create a text file that you can then use your andriod phone to program your \
+	EMUtag, and also track which UID / Passwod / PACK code you already used.
+	The current database contains over 400 UID / Passwod / PACK entries, all gathered \
+	from the Soliforum and the cvs file that CGRILLO maintains."""
+	g_text = """
+	The simpliest way to use this program is to use the GREEN buttons. 
+	First,  Press Get New UID.  This will populate the input fields with the first unused UID.
+	Then press Use this UID.  This will mark the UID as used in the database.
+	Now select the Filament Temperature and Spool Size.
+	Now press Generate Tagdata.
+	This will create a text file, the name starting with UID1, in the current directory. 
+	Now press Exit.  Whats left for you to do is transfer the tagdata file just created \
+	to your phone.  Using the MIFARE++ Ultralight app, program your EMUtag.  Thats it. \
+	You're good to go."""
+	y_text = """
+	The yellow buttons are for database management and searching.  With them you can find used tags, \
+	search for a specific UID or PACK, update and add new records as they are available.  We will go over each button.
+	Clear Input will clear all the fields under the button.  It does not reset Filament Temperature or Spool Size.
+	Search Database will do an OR function on the id, UID-1, UID-2, Password and PACK data. So if you enter data \
+	in all of those fields, you will get all records matching the id, the UID-1, etc...  It will not narrow the \
+	results, but rather create more.  If you want to find the used tages, put the search criteria in the Used filed and search.
+	View All will display all the records in the results box.
+	Update Record will change the record that you have altered in the input boxes.  You must have the id to update the\
+	record. The usual use for this is adding a PACK code to a record you have already entered.
+	Insert Record will create a new record in the database.  
+	"""
+	help_text.insert(END, h_text)
+# put buttons here so they know stuff
+	green_button = Button(button_frame,  bg='green', text='Tell me about green',  command=lambda: whatText(help_text, g_text)	)
+	green_button.pack(side=LEFT)
+	yellow_button = Button(button_frame,  bg='yellow', text='Tell me about yellow',  command=lambda: whatText(help_text, y_text)	)
+	yellow_button.pack(side=LEFT)
+	close_button = Button(button_frame,  text='Close this help window',  command=lambda: destroy_help_window(help_window)	)
+	close_button.pack(side=LEFT)	

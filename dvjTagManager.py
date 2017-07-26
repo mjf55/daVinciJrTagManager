@@ -25,7 +25,7 @@ filemenu.add_command(label="Exit", command=lambda: myExit(window))
 menubar.add_cascade(label="File", menu=filemenu)
 
 helpmenu = Menu(menubar, tearoff=0)
-helpmenu.add_command(label="Help Index", command=lambda: myHelp())
+helpmenu.add_command(label="Help", command=lambda: myHelp())
 helpmenu.add_command(label="About...", command=lambda: notyet(window))
 menubar.add_cascade(label="Help", menu=helpmenu)
 
