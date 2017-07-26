@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date
 
 def connect():  # this is working, but need to think about unique values to not duplicate on update
 	conn=sqlite3.connect("davincipw.db")
@@ -55,7 +56,8 @@ def useUID(status, oid):
 	conn=sqlite3.connect("davincipw.db")
 	conn.text_factory = str  # gets rid of the u in the data (unicode) for fetchall
 	cur=conn.cursor()
-	cur.execute("UPDATE tagdata set Used='Used' WHERE oid=? ", (oid,))
+	usedStr = 'Used- ' + str(date.today())
+	cur.execute("UPDATE tagdata set Used=? WHERE oid=? ", (usedStr, oid,))
 	rows = cur.fetchone() 
 	conn.commit()
 	conn.close()
