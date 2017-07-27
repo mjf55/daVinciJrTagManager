@@ -161,20 +161,30 @@ def myHelp():
 	help_text.pack(side=LEFT, fill=Y)
 	help_scroll.config(command=help_text.yview)
 	help_text.config(yscrollcommand=help_scroll.set)
-	h_text = """
-	Welcome to the daVinci Tag Manager.  This program will allow you \
+	h_text = []
+	h_text.append("Welcome to the daVinci Tag Manager.  This program will allow you \
 to create a text file that you can then use your andriod phone to program your \
-EMUtag, and also track which UID / Passwod / PACK code you already used.
-The current database contains over 400 UID / Passwod / PACK entries, all gathered \
-from the Soliforum and the cvs file that CGRILLO maintains."""
+EMUtag, and also track which UID / Passwod / PACK code you already used.")
+	h_text.append("The current database contains over 400 UID / Passwod / PACK entries, all gathered \
+from the Soliforum and the cvs file that CGRILLO maintains.")
+	h_text.append("Please be aware of some limitations:")
+	h_text.append("There is no input validation on the input fileds.  The id field is a decimal.  The Used field is \
+anything you want, it will be prepopulated with 'Used - <todays date>' when you select Use This UID button.  ALL others \
+are hexidecimal.  There is no checking on the data you write in there.")
+	h_text.append("The lentgh of the field varies.  UID-1 is 3 bytes of HEX data.  UID-2 and Password are 4 bytes of HEX data \
+and the PACK is 2 bytes of Hex.")
+	h_text.append("Page9 data is not populated or suggested.  If you need to populate it ( I have not needed to \
+do it), it is 4 HEX bytes.  The forums say 'First two bytes are always 00. Last three bytes are part of the spools \
+serial number when converted to ASCII.''  Your mileage will vary")
 	g_text = []
 	g_text.append("The simpliest way to use this program is to use the GREEN buttons.") 
 	g_text.append("First,  Press Get New UID.  This will populate the input fields with the first unused UID.")
-	g_text.append("Then press Use this UID.  This will mark the UID as used in the database.")
+	g_text.append("Then press Use This UID.  This will mark the UID as 'Used - <todays date>' in the database.")
 	g_text.append("Now select the Filament Temperature and Spool Size.")
 	g_text.append("Now press Generate Tagdata.")
-	g_text.append("This will create a text file, the name starting with UID1, in the current directory.") 
-	g_text.append("Now press Exit.  Whats left for you to do is transfer the tagdata file you just created \
+	g_text.append("This will create a text file, the name starting with UID-1, in the current directory.") 
+	g_text.append("Now press Exit to exit the program.")
+	g_text.append("Whats left for you to do is transfer the tagdata file you just created \
 to your phone.  Using the MIFARE++ Ultralight app, program your EMUtag.  Thats it. \
 You're good to go.")
 	y_text = []
@@ -188,9 +198,10 @@ results, but rather create more.  If you want to find the used tages, put the se
 	y_text.append("Update Record will change the record that you have altered in the input boxes.  You must have the id to \
 update the record. The usual use for this is adding a PACK code to a record you have already entered.")
 	y_text.append("Insert Record will create a new record in the database. ") 
-	
+	y_text.append("Search Results box.  If you have search results showing in the Search Results box, selecting one ( by clicking it ) will populate the fields above.")
+	y_text.append("Status Line at the bottom will keep you up to date as to what is happening. ")
 
-	help_text.insert(END, h_text)
+	whatText(help_text, h_text)
 # put buttons here so they know stuff
 	green_button = Button(button_frame,  bg='green', text='Tell me about green',  command=lambda: whatText(help_text, g_text)	)
 	green_button.pack(side=LEFT)
