@@ -203,9 +203,49 @@ update the record. The usual use for this is adding a PACK code to a record you 
 
 	whatText(help_text, h_text)
 # put buttons here so they know stuff
+	intro_button = Button(button_frame,  bg='white', text='Introduction',  command=lambda: whatText(help_text, h_text)	)
+	intro_button.pack(side=LEFT)
 	green_button = Button(button_frame,  bg='green', text='Tell me about green',  command=lambda: whatText(help_text, g_text)	)
 	green_button.pack(side=LEFT)
 	yellow_button = Button(button_frame,  bg='yellow', text='Tell me about yellow',  command=lambda: whatText(help_text, y_text)	)
 	yellow_button.pack(side=LEFT)
 	close_button = Button(button_frame,  text='Close this help window',  command=lambda: destroy_help_window(help_window)	)
 	close_button.pack(side=LEFT)	
+
+
+def myHelpAbout():
+# Create new top level window. Opens immediately
+	helpAbout_window = Toplevel()
+	helpAbout_window.title('About: da Vinci Tag Manager')
+	helpAbout_window.geometry("615x300")
+	raise_window(helpAbout_window)
+	helpAbout_window.focus_force()
+	
+#create a button frame
+	button_frame = Frame(helpAbout_window)
+	button_frame.pack()
+
+# add seperator / frame
+	separator = Frame(helpAbout_window, height=2, bd=1, relief=SUNKEN)
+	separator.pack(fill=X, padx=5, pady=5)
+
+# help window focus
+	helpAbout_scroll = Scrollbar(helpAbout_window)
+	helpAbout_text = Text(helpAbout_window, height=10, width=70, wrap=WORD, borderwidth=5, padx=10)
+	helpAbout_scroll.pack(side=RIGHT, fill=Y)
+	helpAbout_text.pack(side=LEFT, fill=Y)
+	helpAbout_scroll.config(command=helpAbout_text.yview)
+	helpAbout_text.config(yscrollcommand=helpAbout_scroll.set)
+	h_text = []
+	h_text.append("daVinci Jr Tag Manager is licensed under the GNU General \
+Public License v3.0 Permissions of this strong copyleft license are conditioned on making \
+available complete source code of licensed works and modifications, which include larger \
+works using a licensed work, under the same license. Copyright and license notices must \
+be preserved. Contributors provide an express grant of patent rights.")
+	h_text.append("Copyright (c) 2017 MJF55 All Rights Reserved.")
+
+	whatText(helpAbout_text, h_text)
+# put buttons here so they know stuff
+	close_button = Button(button_frame,  text='Close this window',  command=lambda: destroy_help_window(helpAbout_window)	)
+	close_button.pack(side=LEFT)	
+
