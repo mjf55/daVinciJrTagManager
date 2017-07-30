@@ -1,3 +1,20 @@
+#myFunctions.py - function program for the daVinciJrTagManager set up programs
+#Copyright (C) 2017  Mark Ferrick
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at my option) any later version.
+#
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 import  csv
 from SQLbackend import connect, insert, delete
 import tkMessageBox
@@ -175,7 +192,20 @@ are hexidecimal.  There is no checking on the data you write in there.")
 and the PACK is 2 bytes of Hex.")
 	h_text.append("Page9 data is not populated or suggested.  If you need to populate it ( I have not needed to \
 do it), it is 4 HEX bytes.  The forums say 'First two bytes are always 00. Last three bytes are part of the spools \
-serial number when converted to ASCII.''  Your mileage will vary")
+serial number when converted to ASCII.'  Your mileage will vary")
+	i_text = []
+	i_text.append("Starting a new database or importing more data in the existing one is easy.  Just select File , then Create or Update Database \
+from the menu bar.") 
+	i_text.append("A file dialogue box will open asking you to select the CSV file to open and import.")
+	i_text.append("VERY IMPORTANT....")
+	i_text.append("It MUST be the CSV file that is in the Soliforum, currently maintained by CGRILLO and is located in post #1 \
+ here: http://www.soliforum.com/topic/15817/davinci-jr-and-mini-nfc-password-requests/  .  That file format, with the current layout \
+ is hard coded into the create / import function")   
+	i_text.append("Just choose the file, select ok, and it will import it.  While importing it will check for a PACK code and if present \
+we assume it is valid.  No PACK code, the entry is skipped.")
+	i_text.append("Duplicate entries are also skipped, meaning if you import the file months later after it has grown, existing entries will \
+not be imported")
+	i_text.append("Please note that the current database contains 427 records.  That should last for awhile")
 	g_text = []
 	g_text.append("The simpliest way to use this program is to use the GREEN buttons.") 
 	g_text.append("First,  Press Get New UID.  This will populate the input fields with the first unused UID.")
@@ -185,7 +215,7 @@ serial number when converted to ASCII.''  Your mileage will vary")
 	g_text.append("This will create a text file, the name starting with UID-1, in the current directory.") 
 	g_text.append("Now press Exit to exit the program.")
 	g_text.append("Whats left for you to do is transfer the tagdata file you just created \
-to your phone.  Using the MIFARE++ Ultralight app, program your EMUtag.  Thats it. \
+to your phone.  Using the Android app, MIFARE++ Ultralight, program your EMUtag.  Thats it. \
 You're good to go.")
 	y_text = []
 	y_text.append("The yellow buttons are for database management and searching.  With them you can find used tags, search for a \
@@ -205,11 +235,13 @@ update the record. The usual use for this is adding a PACK code to a record you 
 # put buttons here so they know stuff
 	intro_button = Button(button_frame,  bg='white', text='Introduction',  command=lambda: whatText(help_text, h_text)	)
 	intro_button.pack(side=LEFT)
+	import_button = Button(button_frame,  bg='cyan', text='Tell me how to import',  command=lambda: whatText(help_text, i_text)	)
+	import_button.pack(side=LEFT)
 	green_button = Button(button_frame,  bg='green', text='Tell me about green',  command=lambda: whatText(help_text, g_text)	)
 	green_button.pack(side=LEFT)
 	yellow_button = Button(button_frame,  bg='yellow', text='Tell me about yellow',  command=lambda: whatText(help_text, y_text)	)
 	yellow_button.pack(side=LEFT)
-	close_button = Button(button_frame,  text='Close this help window',  command=lambda: destroy_help_window(help_window)	)
+	close_button = Button(button_frame,  bg='magenta',text='Close this help window',  command=lambda: destroy_help_window(help_window)	)
 	close_button.pack(side=LEFT)	
 
 
@@ -242,7 +274,7 @@ Public License v3.0 Permissions of this strong copyleft license are conditioned 
 available complete source code of licensed works and modifications, which include larger \
 works using a licensed work, under the same license. Copyright and license notices must \
 be preserved. Contributors provide an express grant of patent rights.")
-	h_text.append("Copyright (c) 2017 MJF55 All Rights Reserved.")
+	h_text.append("Copyright (C) 2017  Mark Ferrick (MJF55) ")
 
 	whatText(helpAbout_text, h_text)
 # put buttons here so they know stuff
