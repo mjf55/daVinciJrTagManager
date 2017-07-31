@@ -102,16 +102,3 @@ def  delete(status, id):
 	conn.close()
 	status.set("Status: Record has been deleted")
 	
-"""
-def search(status, listbox, END, oid, UID1, UID2, Pword, PACK, Used):
-	conn=sqlite3.connect("davincipw.db")
-	conn.text_factory = str   # gets rid of the u in the data (unicode) for fetchall
-	cur=conn.cursor()
-	cur.execute("SELECT oid, UID1, UID2, Pword, PACK, Used FROM tagdata WHERE oid=? OR UID1=? OR UID2=? OR Pword=? OR PACK=? ", (oid, UID1.upper(), UID2.upper(), Pword.upper(), PACK.upper()))
-	rows = cur.fetchall() 
-	conn.close()
-	listbox.delete(0, END)
-	for row in rows:
-		listbox.insert(END, row)
-	status.set("Status: Search Complete.  Results in Listbox")
-"""

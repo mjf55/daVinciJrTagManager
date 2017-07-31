@@ -14,13 +14,11 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import  csv
-from SQLbackend import connect, insert, delete
+from SQLbackend import connect, insert, delete, update
 import tkMessageBox
-from Tkinter import * #Tk, Toplevel, Button
+from Tkinter import * 
 import textwrap
-#import os
 
 def notyet(window):
 	tkMessageBox.showinfo(title="Function Not Supported", message='Sorry, I have not implimented this function yet')
@@ -133,10 +131,38 @@ def clearEntry(sStatus, END, id, uid1, uid2, pword, pack, used, page9):
 	used.delete(0,END)
 	page9.delete(0,END)
 
-def myInsert(status, END, id, uid1, uid2, pword, pack, used, page9):
-	insert(status, uid1.get(), uid2.get(), pword.get(), pack.get(), used.get())
-	clearEntry(status, END, id, uid1, uid2, pword, pack, used, page9)
+def is_hex(*args):
+	ans = True
+	for arg in args:
+		if not arg=='':
+		    try:
+		        int(arg, 16)
+		    except ValueError:
+		    	ans =  False
+	if ans == False:
+		return False
+	else:
+		return True
 
+def myUpdate(status, id, uid1, uid2, pword, pack, used, page9):
+	if len(uid1.get()) == 6 and len(uid2.get()) ==8 and len(pword.get()) ==8 and len(pack.get()) ==4:
+		if is_hex(uid1.get(), uid2.get(), pword.get(), pack.get()):
+			update(status, id.get(), uid1.get(), uid2.get(), pword.get(), pack.get(), used.get())
+			clearEntry(status, END, id, uid1, uid2, pword, pack, used, page9)
+		else:
+			tkMessageBox.showwarning("Warning", "One entry in UID-1, UID-2, Password, PACK  is not hex")
+	else:
+		tkMessageBox.showwarning("Warning", "One entry in UID-1, UID-2, Password, PACK  length is incorrect")		
+		
+def myInsert(status, END, id, uid1, uid2, pword, pack, used, page9):
+	if len(uid1.get()) == 6 and len(uid2.get()) ==8 and len(pword.get()) ==8 and len(pack.get()) ==4:
+		if is_hex(uid1.get(), uid2.get(), pword.get(), pack.get()):
+			insert(status, uid1.get(), uid2.get(), pword.get(), pack.get(), used.get())
+			clearEntry(status, END, id, uid1, uid2, pword, pack, used, page9)
+		else:
+			tkMessageBox.showwarning("Warning", "One entry in UID-1, UID-2, Password, PACK  is not hex")
+	else:
+		tkMessageBox.showwarning("Warning", "One entry in UID-1, UID-2, Password, PACK  length is incorrect")	
 ##########################3  Below added for help window ###################
 def raise_window(window):
     window.attributes('-topmost', 1)
@@ -185,14 +211,15 @@ EMUtag, and also track which UID / Passwod / PACK code you already used.")
 	h_text.append("The current database contains over 400 UID / Passwod / PACK entries, all gathered \
 from the Soliforum and the cvs file that CGRILLO maintains.")
 	h_text.append("Please be aware of some limitations:")
-	h_text.append("There is no input validation on the input fileds.  The id field is a decimal.  The Used field is \
+	h_text.append("There is  input validation on the UID-1, UId-2, Password and PACK.  We check both the length \
+and make sure that theey are hexidecimal.  The id field is a decimal.  The Used field is \
 anything you want, it will be prepopulated with 'Used - <todays date>' when you select Use This UID button.  ALL others \
-are hexidecimal.  There is no checking on the data you write in there.")
+are hexidecimal.")
 	h_text.append("The lentgh of the field varies.  UID-1 is 3 bytes of HEX data.  UID-2 and Password are 4 bytes of HEX data \
 and the PACK is 2 bytes of Hex.")
 	h_text.append("Page9 data is not populated or suggested.  If you need to populate it ( I have not needed to \
 do it), it is 4 HEX bytes.  The forums say 'First two bytes are always 00. Last three bytes are part of the spools \
-serial number when converted to ASCII.'  Your mileage will vary")
+serial number when converted to ASCII.'  Page 9 data is not saved in the database, but is put in the tagdata file")
 	i_text = []
 	i_text.append("Starting a new database or importing more data in the existing one is easy.  Just select File , then Create or Update Database \
 from the menu bar.") 

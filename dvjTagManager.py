@@ -137,7 +137,7 @@ b3.grid(row=13, column=4)
 b4=Button(window, text="View All", bg='yellow', width=16, command=lambda: view(sStatus, window, list1, END))
 b4.grid(row=13, column=5)
 
-b5=Button(window, text="Update Record", bg='yellow', width=16, command=lambda: update(sStatus, e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get()))
+b5=Button(window, text="Update Record", bg='yellow', width=16, command=lambda: myUpdate(sStatus, e1, e2, e3, e4, e5, e6, e7))
 b5.grid(row=14, column=4)
 
 b6=Button(window, text="Insert Record", bg='yellow', width=16, command=lambda: myInsert(sStatus, END, e1, e2, e3, e4, e5, e6, e7))
