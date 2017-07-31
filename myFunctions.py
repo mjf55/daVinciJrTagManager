@@ -75,8 +75,8 @@ def onselect(evt, id, uid1, uid2, pword, pack, used):
 
 def generateTagData(status, uid1, uid2, pword, pack, temperature, spoolsize, page9):
 	#Page  300m/300m		200m/200/		PLA/190*		PLA/210*
-	#10,11 E0930400			00030d40
-	#20    E0930400			00030d40
+	#10,11 E0930400			400D0300
+	#20    E0930400			400D0300
 	#21    A8813654			081F3154
 	#22    F03FEECE			50B1E0CE
 	#23    F26E4D76			52E74F76
@@ -95,9 +95,9 @@ def generateTagData(status, uid1, uid2, pword, pack, temperature, spoolsize, pag
 		word[8] = '5A504F00'
 	if spoolsize == "200":
 		print "Spoolsize = 200"
-		word[10] = '00030D40'
-		word[11] = '00030D40'
-		word[20] = '00030D40'
+		word[10] = '400D0300'
+		word[11] = '400D0300'
+		word[20] = '400D0300'
 		word[21] = '081F3154'
 		word[22] = '50B1E0CE'
 		word[23] = '52E74F76'
