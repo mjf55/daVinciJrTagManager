@@ -43,8 +43,9 @@ def dbCreateUpdate(status, window, FD):
 	connect()
 	with open(fname, 'rb') as csvfile:  
 		for line in csvfile.readlines():
+			print line
 			array = line.split(',')
-			if array[0] == "4":  					# first byte must be 4
+			if array[0] == "4" or array[0] =="04":  					# first byte must be 4
 				for x in range(0 , len(array)):
 					if len(array[x] ) ==  1:
 						array[x] = '0' + array[x]  # make sure there are 2 characters
@@ -57,6 +58,7 @@ def dbCreateUpdate(status, window, FD):
 				PACK = tempPACK.rstrip()
 				# Use only if there is a PACK valid -> Record is valid
 				if PACK:
+					print 'data ok'
 					insert(status, UID1.rstrip(), UID2.rstrip(), Pword.rstrip(), PACK.rstrip(), Used)
 	status.set("Status: Database updated")
 
