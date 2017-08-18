@@ -14,3 +14,9 @@ As a database, you can search, delete update and insert records.
 A help system is available to help guide the useage of daVinciJrTagManager
 
 The main program is dvjTagManager.py and is written in Python 2.7
+
+NOTE:  You do not need to import the included csv file.  It is included only to show the format
+necessary to import additional UID / Password / PACK combinations.  
+
+Just download the zip file from GitHub, Unpack it to the directory of your choice and
+just run dvjTagManager.py and you have 400+ codes to start using.
