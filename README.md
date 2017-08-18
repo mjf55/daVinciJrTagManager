@@ -19,4 +19,4 @@ NOTE:  You do not need to import the included csv file.  It is included only to 
 necessary to import additional UID / Password / PACK combinations.  
 
 Just download the zip file from GitHub, Unpack it to the directory of your choice and
-just run dvjTagManager.py and you have 400+ codes to start using.
+just run dvjTagManager.py ( from that directory )and you have 400+ codes to start using.
